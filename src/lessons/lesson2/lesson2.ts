@@ -250,6 +250,7 @@ function flatten(array: Array<number>) {
     return flattend;
 }
 
+
 // just a plug
 export default () => {
 };
