@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import API from './API';
-import './lesson_3';
+import React, {useState} from "react";
+import API from "./API";
+import "./lesson_3";
+import {log} from "util";
 
 const Lesson3 = () => {
-    const [searchName, setSearchName] = useState('');
-    const [serachResult, setSerachResult] = useState('');
-    const [searchNameByType, setSearchNameByType] = useState('');
-    const [serachResultByType, setSerachResultByType] = useState('');
+    const [searchName, setSearchName] = useState("");
+    const [serachResult, setSerachResult] = useState("");
+    const [searchNameByType, setSearchNameByType] = useState("");
+    const [serachResultByType, setSerachResultByType] = useState("");
 
     const searchFilm = async () => {
-        let promise1 = await API.searchFilmsByTitle(searchName)
-         setSerachResult(JSON.stringify(promise1.data))
+        await API.searchFilmsByTitle(searchName)
+            .then(({data}) => {
+                if (data.Response === "True") {
+                    setSerachResult(JSON.stringify(data.Search))
+                } else {
+                    setSerachResult(data.Error)
+                }
+            })
     };
 
-    const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
-       let promise2 = API.searchFilmsByType(searchNameByType, type)
-        setSerachResultByType(JSON.stringify(promise2))
+    const searchByType = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : "";
+        let promise2 = await API.searchFilmsByType(searchNameByType, type)
+        setSerachResultByType(JSON.stringify(promise2.data))
     }
 
     return (
@@ -33,7 +40,8 @@ const Lesson3 = () => {
 
             <div>
                 <h3><p>Search by type:</p></h3>
-                <input type="text" value={searchNameByType} onChange={(e) => setSearchNameByType(e.currentTarget.value)}/>
+                <input type="text" value={searchNameByType}
+                       onChange={(e) => setSearchNameByType(e.currentTarget.value)}/>
                 <button onClick={searchByType} data-t='movie'>Movie</button>
                 <button onClick={searchByType} data-t='series'>Series</button>
                 <div>
@@ -44,3 +52,24 @@ const Lesson3 = () => {
     );
 }
 export default Lesson3;
+
+
+//example async/await
+// const wait = (ms: number) => {
+// return new Promise((resolve) => {
+//     setTimeout(() => {
+//         resolve()
+//     }, ms)
+// })
+// }
+//
+// async function counter() {
+//     await wait(1000);
+//     console.log(1);
+//     await wait(1000);
+//     console.log(2);
+//     await wait(1000);
+//     console.log(3)
+// }
+//
+// counter()
