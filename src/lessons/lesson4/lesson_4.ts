@@ -1,12 +1,32 @@
+import {log} from "util";
+
 console.log('lesson 4');
 
 // http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
-// https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
+    // https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
 
 
 // Task 01
 // Создайте промис, который постоянно находиться в состоянии pending.
-// В конструкторе промиса выведите в консоль сообщение "Promise is created".
+// В конструкторе промиса выведите в консоль сообщение "Promise is creat
+export let promise = new Promise(function(resolve, reject) {
+    resolve  ("Promise is creat")
+
+    // resolve("done");
+    // reject(new Error("…")); // игнорируется
+    // setTimeout(() => resolve("…")); // игнорируется
+});
+
+export let promiseCallback = promise.then(result => console.log("Promise is creat"))
+// export let promise = async function PromiseCreat () {
+//      console.log("Promise is creat")
+//      .pending(console.log("Promise is created"))
+// }
+
+// let promise1 = new Promise(resolve => resolve + 1);
+// //@ts-ignore
+// let promise2 = new Promise(resolve => 2)
+// let Promise: any = new Promise.all([promise1, promise2])
 
 
 // Task 02
