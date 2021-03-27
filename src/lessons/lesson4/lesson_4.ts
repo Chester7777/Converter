@@ -1,23 +1,22 @@
 import {log} from "util";
 
-console.log('lesson 4');
+console.log("lesson 4");
 
 // http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
-    // https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
+// https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
 
 
 // Task 01
 // Создайте промис, который постоянно находиться в состоянии pending.
 // В конструкторе промиса выведите в консоль сообщение "Promise is creat
-export let promise = new Promise(function(resolve, reject) {
-    resolve  ("Promise is creat")
-
+export let promise1 = new Promise(function (resolve, reject) {
+    resolve("Promise is creat")
     // resolve("done");
     // reject(new Error("…")); // игнорируется
     // setTimeout(() => resolve("…")); // игнорируется
 });
+export let promiseCallback = () => promise1.then(result => console.log(result))
 
-export let promiseCallback = promise.then(result => console.log("Promise is creat"))
 // export let promise = async function PromiseCreat () {
 //      console.log("Promise is creat")
 //      .pending(console.log("Promise is created"))
@@ -33,20 +32,37 @@ export let promiseCallback = promise.then(result => console.log("Promise is crea
 // Создайте промис, который после создания сразу же переходит в состояние resolve
 // и возвращает строку 'Promise Data'
 // Получите данные промиса и выведите их в консоль
-
+export const promise2 = new Promise((resolve) => {
+    resolve("Promise Data")
+})
+promise2.then(
+    result => console.log(result)
+)
 
 // Task 03
 // Создайте промис, который после создания сразу же переходит в состояние rejected
 // и возвращает строку 'Promise Error'
 // Получите данные промиса и выведите их в консоль
-
+export const promise3 = new Promise((resolve, reject) => {
+    reject(new Error("Promise Error"))
+})
+promise3.catch(
+    err => console.log(err)
+)
 
 // Task 04
 // Создайте промис, который переходит в состояние resolved через 3с.
 // (Используйте setTimeout)
 // и возвращает строку 'Promise Data'
 // Получите данные промиса и выведите их в консоль
-
+export const promise4 = new Promise((resolve => {
+    setTimeout(() => {
+        resolve("Promise Data")
+    }, 3000)
+}))
+promise4.then(
+    result => console.log(result)
+)
 
 // Task 05
 // Создайте литерал объекта handlePromise со следующими свойствами:
@@ -60,6 +76,39 @@ export let promiseCallback = promise.then(result => console.log("Promise is crea
 // описаного выше объекта: свойство promise получает новый созданный промис,
 // свойства resolve и reject получают ссылки на соответствующие функции
 // resolve и reject. Следующие два обработчика запускают методы resolve и reject.
+
+type HandlePromiseType = {
+    promise: string | null
+    resolve: string | null
+    reject: string | null
+    onSuccess: (paramName: any) => void
+    onError: (paramName: any) => void
+}
+let handlePromise: HandlePromiseType = {
+    promise: null,
+    resolve: null,
+    reject: null,
+    onSuccess: (paramName: any) => console.log(`Promise is resolved with data: ${paramName}`),
+    onError: (paramName: any) => console.log(`Promise is rejected with error: ${paramName}`),
+}
+console.log(handlePromise)
+export let createPromise = () => {
+    let promise = new Promise((resolve, reject) => {
+        resolve("Promise is resolved")
+    })
+        //@ts-ignore
+        handlePromise.promise = promise,
+        //@ts-ignore
+        handlePromise.resolve = promise.then(result => console.log(result)),
+        //@ts-ignore
+        handlePromise.reject = promise.catch(err => console.log(new Error(err)))
+}
+export let resolvePromise = () => {
+    console.log(handlePromise.resolve)
+}
+export let rejectPromise = () => {
+    console.log(handlePromise.reject)
+}
 
 
 // Task 06
@@ -77,6 +126,6 @@ export let promiseCallback = promise.then(result => console.log("Promise is crea
 // и выведите в консоль {name, age, city}
 
 
-
 // just a plug
-export default ()=>{};
+export default () => {
+};
