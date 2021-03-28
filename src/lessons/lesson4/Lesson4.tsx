@@ -1,6 +1,6 @@
 import React from "react"
 import "./lesson_4";
-import {createPromise, promiseCallback, rejectPromise, resolvePromise} from "./lesson_4";
+import {createPromise, rejectPromise, resolvePromise} from "./lesson_4";
 
 const Lesson4 = () => {
     return (

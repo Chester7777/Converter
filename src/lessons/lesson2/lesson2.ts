@@ -20,6 +20,80 @@ console.log("lesson 2");
 // https://learn.javascript.ru/recursion
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
 
+// let a = 50;
+// let b = 100;
+//
+// // let globalScope = {
+// //     outerScope: null,
+// //     a: 10,
+// //     b: 100,
+// //     f: 'Function',
+// // }
+// a = 500;
+// function f( arg:number ) {
+//     let param = 5;
+//     let secondParam = 10;
+//     console.log(param + secondParam);
+//     const result = param + secondParam + arg;
+//     arg += result; // arg = arg + result
+//     console.log(a + b);
+//     return () => {
+//         a = 10;
+//         console.log(arg + a);
+//     }
+// }
+// f(100)();
+// console.log(a);
+// let a = 1000;
+// console.log(a);
+
+// Scope F
+// let scopeF = {
+//     outerScope: globalScope,
+//     arg: 215,
+//     param: 5,
+//     secondParam: 10,
+//     result: 115,
+// };
+
+// let arrowScope = {
+//     outerScope: scopeF,
+// }
+
+
+// Recursion
+// sumTo(1) = 1
+// sumTo(2) = 2 + 1 = 3
+// sumTo(3) = 3 + 2 + 1 = 6
+// sumTo(4) = 4 + 3 + 2 + 1 = 10
+// ...
+// sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
+
+// function sumTo(n: number) {
+//     let result = 0;
+//     for (let i = n; i > 0; i--) {
+//         result += i;
+//     }
+//     return result;
+// }
+
+// function sumTo(n: number): number {
+//     if (n === 1) return n;
+//     return n + sumTo( n - 1);
+// }
+
+// 1! = 1
+// 2! = 2 * 1 = 2
+// 3! = 3 * 2 * 1 = 6
+// 4! = 4 * 3 * 2 * 1 = 24
+// 5! = 5 * 4 * 3 * 2 * 1 = 120
+
+// function factorial(n: number): number {
+//     if (n === 1) return n;
+//     return n * factorial( n - 1);
+// }
+//
+// console.log(factorial(5));
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
@@ -129,8 +203,35 @@ function superSum(n: number) {
     return helper;
 }
 
-
 // console.log(superSum(3)(2)(5)(3))
+
+// let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// arr.length = 5;
+// console.log(arr)
+// arr.length = 10;
+// arr[11] = 15;
+// console.log(arr)
+// for (let i =0; i < arr.length; i++) {
+//     console.log(arr[i]);
+// }
+//
+// arr.forEach((item, i, acc) => console.log(item))
+
+// function add(n:number){
+//     let currentSum = n;
+//     function f(b: number) {
+//         currentSum += b;
+//         return f;
+//     }
+//     f.toString = function() {
+//         return currentSum;
+//     };
+//     return f;
+// }
+//
+//
+// console.log(add(3)(2)(5)(3));
+
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте //@ts-ignore
 

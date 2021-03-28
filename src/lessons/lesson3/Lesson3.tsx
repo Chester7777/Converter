@@ -9,21 +9,39 @@ const Lesson3 = () => {
     const [searchNameByType, setSearchNameByType] = useState("");
     const [serachResultByType, setSerachResultByType] = useState("");
 
+    // const searchFilm = async () => {
+    //     await API.searchFilmsByTitle(searchName)
+    //         .then(({data}) => {
+    //             if (data.Response === "True") {
+    //                 setSerachResult(JSON.stringify(data.Search))
+    //             } else {
+    //                 setSerachResult(data.Error)
+    //             }
+    //         })
+    // };
     const searchFilm = async () => {
-        await API.searchFilmsByTitle(searchName)
-            .then(({data}) => {
-                if (data.Response === "True") {
-                    setSerachResult(JSON.stringify(data.Search))
-                } else {
-                    setSerachResult(data.Error)
-                }
-            })
+        // const result  =  await API.searchFilmsByTitle(searchName);
+        // console.log(result);
+        try {
+            const { data } =  await API.searchFilmsByTitle(searchName);
+            const { Response, Search, Error} = data;
+            Response === 'True'
+                ? setSerachResult(JSON.stringify(Search))
+                : setSerachResult(Error);
+        } catch (e) {
+
+        }
     };
 
-    const searchByType = async (e: React.MouseEvent<HTMLButtonElement>) => {
-        const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : "";
-        let promise2 = await API.searchFilmsByType(searchNameByType, type)
-        setSerachResultByType(JSON.stringify(promise2.data))
+
+    // const searchByType = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    //     const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : "";
+    //     let promise2 = await API.searchFilmsByType(searchNameByType, type)
+    //     setSerachResultByType(JSON.stringify(promise2.data))
+    // }
+    const searchByType = (e: React.MouseEvent<HTMLButtonElement>) => {
+        const type: string = e.currentTarget.dataset.t ? e.currentTarget.dataset.t : '';
+        API.searchFilmsByType(searchNameByType, type);
     }
 
     return (
