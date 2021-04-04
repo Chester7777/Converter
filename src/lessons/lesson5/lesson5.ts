@@ -1,4 +1,4 @@
-console.log('Lesson 5');
+console.log("Lesson 5");
 
 // Keyword - this
 // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/this
@@ -112,7 +112,6 @@ console.log('Lesson 5');
 // obj.af();
 
 
-
 ///// Bind
 
 // let obj = {
@@ -174,7 +173,6 @@ console.log('Lesson 5');
 // let t1 = new (MyFirstConstructorFunc as any)('Evgen', 32);
 
 
-
 // Task 01
 // Дан объект someObj, реализуйте функцию greeting и присвойте ее ключу объекта с аналогичным именем.
 // Функция должна вернуть строку `My name is ${name}. I am ${age}`, где name и age берутся из свойств объекта
@@ -185,16 +183,16 @@ type someObjType = {
     greeting?: Function,
 }
 
-let someObj:someObjType = {
-    name: 'Eugene',
+let someObj: someObjType = {
+    name: "Eugene",
     age: 32
 }
 
-// function greeting(this: someObjType) {
-//     return `My name is ${this.name}. I am ${this.age}`
-// }
-// someObj.greeting = greeting;
-// console.log(someObj.greeting());
+function greeting(this: someObjType) {
+    return `My name is ${this.name}. I am ${this.age}`
+}
+someObj.greeting = greeting;
+console.log(someObj.greeting());
 
 
 // Task 02
@@ -253,7 +251,7 @@ type ConterType = {
     getCurrentCount: () => number;
     increment: () => ConterType;
     decrement: () => ConterType;
-    setCurrentCount: (n:number) => ConterType;
+    setCurrentCount: (n: number) => ConterType;
     restCurrentCount: () => ConterType;
 }
 
@@ -286,11 +284,42 @@ let counterObj: ConterType = {
 // Task 04
 // Написать функцию конструктор myFirstConstructorFunc которая принимает 2 параметра name и age и возвращает объект
 // у которого будут эти свойства и метод greeting из Task 01
+// type TaskType = {
+//     name: string
+//     age: number
+//     greeting: Function
+// }
+// // let Task  = new (MyFirstConstructorFunc as any)("Anna", 30)
+//
+//
+// function MyFirstConstructorFunc(name: string, age: number) {
+//     //@ts-ignore
+//      this.name = name;
+//     //@ts-ignore
+//      this.age = age;
+//     //@ts-ignore
+//     this.greeting = function greeting(this: someObjType) {
+//         return `My name is ${this.name}. I am ${this.age}`
+//     }
+// }
+// //@ts-ignore
+// let newObj = new MyFirstConstructorFunc("Anna", 30)
+//
+// console.log(newObj)
+
 
 // Task 05 есть 2 объекта One и Two. С помощью bind и метода sayHello заставьте поздороваться объект One
+type OneType = {
+    name: string
+}
+let One: OneType = {name: "One"};
+let Two = {
+    name: "Two", sayHello: function () {
+        console.log(`Hello, my name is ${this.name}`)
+    }
+};
+// Two.sayHello.bind(One);
 
-let One = {name: 'One'};
-let Two = {name: 'Two', sayHello: function() {console.log(`Hello, my name is ${this.name}`)}};
 
 // Task 06
 // создайте объект helperObj у которого есть следующие методы:
@@ -299,36 +328,85 @@ let Two = {name: 'Two', sayHello: function() {console.log(`Hello, my name is ${t
 // greeting - используется функция sayHello из Task 05
 // можно использовать @ts-ignore
 
+type HelperObjType = {
+    name: string
+    age: number
+    changeName: Function
+    setAge: Function
+    greeting: Function
+}
+const helperObj: HelperObjType = {
+    //@ts-ignore
+    name: "",
+    age: 0,
+    changeName(name: string) {
+        this.name = name
+    },
+    setAge(age: number) {
+        this.age = age
+    },
+    // greeting: Two.sayHello;
+    greeting: function () {
+        console.log(`Hello, my name is ${this.name}`)
+    }
+}
+console.log(helperObj)
+console.log(helperObj.greeting.bind(helperObj))
+console.log(helperObj.changeName("Oly"))
+
 // Bind
 // 1) Дана функция sumTwoNumbers, реализовать функцию bindNumber которая принимает функцию sumTwoNumbers и число, и
 // возвращает другую функцию, которое также принимает число и возвращает сумму этих чисел. Замыкание использовать нельзя
-function sumTwoNumbers(a:number,b:number):number {return a + b};
+function sumTwoNumbers(a: number, b: number): number {
+    return a + b
+};
+function bindNum (fn: Function, n: number){
+    return fn.bind(null, n)
+}
+let bindTen = bindNum(sumTwoNumbers, 10)
+console.log(bindTen(5))
 
 // 2) Напишите функцию которая принимает первым аргументом объект One, а вторым helperObj. Данная функция
 // возвращает другую функцию которая принимает строку в качестве аргумента и устанавливает ее свойству name объекта One
-// 3) Одной строкой установить с помощью helperObj объекту Two поле age в значение 30
-// 4) Создать метод hi у объекта One, который всегда вызывает метод greeting объекта helperObj от имени Two
+function bindFunction (obj: OneType, fn: HelperObjType) {
+    return function (str: string) {
+        helperObj.changeName.bind(obj)(str)
+    }
+}
+let changeName = bindFunction(One, helperObj)
+changeName("Oly");
+console.log(One)
 
+// 3) Одной строкой установить с помощью helperObj объекту Two поле age в значение 30
+helperObj.setAge.bind(Two)(30)
+
+// 4) Создать метод hi у объекта One, который всегда вызывает метод greeting объекта helperObj от имени Two
+//@ts-ignore
+One.hi = helperObj.greeting.bind(Two)
+//@ts-ignore
+// console.log((One.hi()))
 // Реализовать задачи 2-4 из Bind с помощью Call
 
 
 //@ts-ignore
 function foo(callback) {
-    setTimeout(function() {
-        callback('A');
-    }, Math.random()*100);
+    setTimeout(function () {
+        callback("A");
+    }, Math.random() * 100);
 }
+
 //@ts-ignore
 function bar(callback) {
-    setTimeout(function() {
-        callback('B');
-    }, Math.random()*100);
+    setTimeout(function () {
+        callback("B");
+    }, Math.random() * 100);
 }
+
 //@ts-ignore
 function baz(callback) {
-    setTimeout(function() {
-        callback('C');
-    }, Math.random()*100);
+    setTimeout(function () {
+        callback("C");
+    }, Math.random() * 100);
 }
 
 function callback(fn: any) {
@@ -342,7 +420,6 @@ Promise.all([foo, bar, baz].map(item => new Promise(res => {
 });
 
 
-
 // Promise.all([foo, bar, baz].map(item => new Promise((res, rej) => {
 //     item(res);
 // }))).then(result => result.forEach(el => console.log(el)))
@@ -350,9 +427,6 @@ Promise.all([foo, bar, baz].map(item => new Promise(res => {
 // Promise.all([foo, bar, baz].map(item => new Promise(res => item(res) ))).then(result => result.forEach(el => console.log(el)));
 
 
-
-
-
-
 // just a plug
-export default () => {};
+export default () => {
+};
