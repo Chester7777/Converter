@@ -1,4 +1,6 @@
-console.log('Lesson 6');
+import {log} from "util";
+
+console.log("Lesson 6");
 
 // Class
 // https://learn.javascript.ru/classes
@@ -7,15 +9,145 @@ console.log('Lesson 6');
 // https://www.youtube.com/watch?v=BASquaxab_w
 // https://www.youtube.com/watch?v=uLY9GXGMXaA
 
+//     class Clock {
+//         constructor({ template }) {
+//             this.template = template;
+//         }
+//
+//         render() {
+//             let date = new Date();
+//
+//             let hours = date.getHours();
+//             if (hours < 10) hours = '0' + hours;
+//
+//             let mins = date.getMinutes();
+//             if (mins < 10) mins = '0' + mins;
+//
+//             let secs = date.getSeconds();
+//             if (secs < 10) secs = '0' + secs;
+//
+//             let output = this.template
+//                 .replace('h', hours)
+//                 .replace('m', mins)
+//                 .replace('s', secs);
+//
+//             console.log(output);
+//         }
+//
+//         stop() {
+//             clearInterval(this.timer);
+//         }
+//
+//         start() {
+//             this.render();
+//             this.timer = setInterval(() => this.render(), 1000);
+//         }
+//     }
+//
+//
+// let clock = new Clock({template: 'h:m:s'});
+// clock.start();
+
+
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
 // Добавить возможность вывода фамилий и номеров групп студентов, имеющих оценки, равные только 4 или 5.
+// class Student {
+//     constructor(options: any) {
+//         //@ts-ignore
+//         this.name = options.name
+//         //@ts-ignore
+//         this.firstName = options.firstName
+//         //@ts-ignore
+//         this.numGrupp = options.numGrupp
+//         //@ts-ignore
+//         this.academicPerformance = options.academicPerformance
+//     }
+//     sort() {
+//         //@ts-ignore
+//        let sortArray = this.academicPerformance.sort()
+//         if(Math.min(sortArray) === 4 && Math.max(sortArray) === 5) {
+//             //@ts-ignore
+//             console.log(this.firstName + this.numGrupp)
+//         }
+//     }
+// }
+// // class StudentArray extends Student {
+// //
+// // }
+//
+// let student = [new Student({
+//     name: "Any",
+//     firstName: "Kotova",
+//     numGrupp: 211,
+//     academicPerformance: [1, 2, 3, 4, 5],
+// }),
+//     new Student({
+//         name: "Any",
+//         firstName: "VORON",
+//         numGrupp: 212,
+//         academicPerformance: [4, 4,4, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Tor",
+//         numGrupp: 213,
+//         academicPerformance: [1, 2, 3, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "CSS",
+//         numGrupp: 214,
+//         academicPerformance: [5, 5, 4, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Axa",
+//         numGrupp: 215,
+//         academicPerformance: [5, 5, 5, 5, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Durdom",
+//         numGrupp: 216,
+//         academicPerformance: [1, 2, 3, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Root",
+//         numGrupp: 217,
+//         academicPerformance: [1, 2, 3, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Plaxa",
+//         numGrupp: 218,
+//         academicPerformance: [5, 4, 4, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Rad",
+//         numGrupp: 219,
+//         academicPerformance: [1, 2, 3, 4, 5],
+//     }),
+//     new Student({
+//         name: "Any",
+//         firstName: "Orlova",
+//         numGrupp: 220,
+//         academicPerformance: [1, 2, 3, 4, 5],
+//     })]
+
+
+
 
 // Task 02
 // Создать класс с двумя переменными. Добавить конструктор с входными параметрами и инициализирующий члены класса по умолчанию.
 // Можно ли создать метод на экземпляре класса который будет удалять сам экземпляр класса?
 // Можно ли создать метод класса который будет удалять экземпляр класса?
+
+
+
 
 // Task 03
 // Составить описание класса для представления времени. Предусмотреть возможности установки времени и изменения его отдельных
