@@ -1,6 +1,4 @@
-import {log} from "util";
-
-console.log("Lesson 6");
+console.log('Lesson 6');
 
 // Class
 // https://learn.javascript.ru/classes
@@ -9,145 +7,114 @@ console.log("Lesson 6");
 // https://www.youtube.com/watch?v=BASquaxab_w
 // https://www.youtube.com/watch?v=uLY9GXGMXaA
 
-//     class Clock {
-//         constructor({ template }) {
-//             this.template = template;
-//         }
+// interface IPerson {
+//     name: string,
+//     age: number,
+//     say: Function,
+// }
 //
-//         render() {
-//             let date = new Date();
+// interface IPerson2 {
+//     name: string,
+//     hi: Function,
+// }
 //
-//             let hours = date.getHours();
-//             if (hours < 10) hours = '0' + hours;
+// // class Test2 {
+// //     #car2 = 'BMW';
+// // }
 //
-//             let mins = date.getMinutes();
-//             if (mins < 10) mins = '0' + mins;
 //
-//             let secs = date.getSeconds();
-//             if (secs < 10) secs = '0' + secs;
+// class Test implements IPerson, IPerson2 {
+//     name: string;
+//     age: number;
+//     static yo = 'yo';
+//     private car = 'Audi';
 //
-//             let output = this.template
-//                 .replace('h', hours)
-//                 .replace('m', mins)
-//                 .replace('s', secs);
 //
-//             console.log(output);
-//         }
-//
-//         stop() {
-//             clearInterval(this.timer);
-//         }
-//
-//         start() {
-//             this.render();
-//             this.timer = setInterval(() => this.render(), 1000);
-//         }
+//     constructor(name: string, age: number) {
+//         this.name = name;
+//         this.age = age;
+//         // this.hi = function () {
+//         //     console.log('hi');
+//         // }
 //     }
 //
+//     say() {
+//         console.log('Person is saying');
+//         console.log(this.car);
+//     }
 //
-// let clock = new Clock({template: 'h:m:s'});
-// clock.start();
+//     hi() {
+//         console.log('hi');
+//     }
+//     bye() {
+//         console.log('Bye')
+//     }
+//
+//     static YOYOYO () {
+//     }
+//
+// }
 
+// console.dir(Test);
+// console.dir(Promise);
+
+//
+// let test = new Test('Evgen',  32)
+// console.log(test)
+//
+// test.say();
+
+class Animal {
+    name: string;
+    constructor(name: string) {
+        this.name = name;
+    }
+    eat() {
+        console.log(' Animal is eating');
+    }
+}
+class Monkey extends Animal {
+    age: number
+
+    constructor(name: string, age: number) {
+        super(name);
+        this.age = age;
+    }
+
+    sleep() {
+        console.log('is sleeping');
+    }
+
+    eat() {
+        console.log(this.name + ' is eating');
+        super.eat();
+    }
+}
+
+
+let m = new Monkey('Yo', 10);
+console.log(m);
+m.eat();
 
 // Task 01
 // Создайте структуру с именем student, содержащую поля: имя и фамилия, номер группы, успеваемость (массив из пяти элементов).
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
 // Добавить возможность вывода фамилий и номеров групп студентов, имеющих оценки, равные только 4 или 5.
-// class Student {
-//     constructor(options: any) {
-//         //@ts-ignore
-//         this.name = options.name
-//         //@ts-ignore
-//         this.firstName = options.firstName
-//         //@ts-ignore
-//         this.numGrupp = options.numGrupp
-//         //@ts-ignore
-//         this.academicPerformance = options.academicPerformance
-//     }
-//     sort() {
-//         //@ts-ignore
-//        let sortArray = this.academicPerformance.sort()
-//         if(Math.min(sortArray) === 4 && Math.max(sortArray) === 5) {
-//             //@ts-ignore
-//             console.log(this.firstName + this.numGrupp)
-//         }
-//     }
-// }
-// // class StudentArray extends Student {
-// //
-// // }
-//
-// let student = [new Student({
-//     name: "Any",
-//     firstName: "Kotova",
-//     numGrupp: 211,
-//     academicPerformance: [1, 2, 3, 4, 5],
-// }),
-//     new Student({
-//         name: "Any",
-//         firstName: "VORON",
-//         numGrupp: 212,
-//         academicPerformance: [4, 4,4, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Tor",
-//         numGrupp: 213,
-//         academicPerformance: [1, 2, 3, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "CSS",
-//         numGrupp: 214,
-//         academicPerformance: [5, 5, 4, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Axa",
-//         numGrupp: 215,
-//         academicPerformance: [5, 5, 5, 5, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Durdom",
-//         numGrupp: 216,
-//         academicPerformance: [1, 2, 3, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Root",
-//         numGrupp: 217,
-//         academicPerformance: [1, 2, 3, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Plaxa",
-//         numGrupp: 218,
-//         academicPerformance: [5, 4, 4, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Rad",
-//         numGrupp: 219,
-//         academicPerformance: [1, 2, 3, 4, 5],
-//     }),
-//     new Student({
-//         name: "Any",
-//         firstName: "Orlova",
-//         numGrupp: 220,
-//         academicPerformance: [1, 2, 3, 4, 5],
-//     })]
-
-
-
 
 // Task 02
 // Создать класс с двумя переменными. Добавить конструктор с входными параметрами и инициализирующий члены класса по умолчанию.
 // Можно ли создать метод на экземпляре класса который будет удалять сам экземпляр класса?
 // Можно ли создать метод класса который будет удалять экземпляр класса?
 
+class Test {
+    param1: string;
+    param2: string;
 
-
+    constructor(param1: string = 'Hello', param2: string = 'Bye') {
+        this.param1 = param1;
+        this.param2 = param2;
+    }
+}
 
 // Task 03
 // Составить описание класса для представления времени. Предусмотреть возможности установки времени и изменения его отдельных
@@ -161,6 +128,86 @@ console.log("Lesson 6");
 // Методы: установка значений атрибутов, получение значений атрибутов, вывод информации.
 // Создать массив объектов данного класса.
 // Вывести список покупателей в алфавитном порядке и список покупателей, у которых номер кредитной карточки находится в заданном диапазоне.
+
+interface ICustomer {
+    name: string;
+    surname: string;
+    address: string;
+    account: number;
+}
+
+class Customer implements ICustomer{
+    private _name: string;
+    private _surname: string;
+    private _address: string;
+    private _account: number;
+
+    constructor(name: string, surname: string, address: string, account: number) {
+        this._name = name;
+        this._surname = surname;
+        this._address = address;
+        this._account = account;
+    }
+
+
+    get name() {
+        return this._name;
+    }
+
+    set name(n) {
+        this._name = n;
+    }
+
+    get surname() {
+        return this._surname;
+    }
+
+    set surname(s) {
+        this._surname = s;
+    }
+
+    get address() {
+        return this._address;
+    }
+
+    set address(a) {
+        this._address = a;
+    }
+
+    get account() {
+        return this._account;
+    }
+
+    set account(acc) {
+        this._account = acc;
+    }
+
+    print() {
+        console.log(`${this.name} ${this.surname}, Address - ${this.address}, Account - ${this.account}`);
+    }
+
+    static sort(c1: ICustomer, c2: ICustomer) {
+        if (c1.name > c2.name) {
+            return 1;
+        } else if (c1.name < c2.name) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+let custs = [];
+
+custs.push(new Customer('Ivan', 'Ivanovich', 'Minsk, Nemiga str, 10- 58', 613654630));
+custs.push(new Customer('Peter', 'Ivanovich', 'Minsk, Nemiga str, 10- 58', 613654630));
+custs.push(new Customer('Andry', 'Ivanovich', 'Minsk, Nemiga str, 10- 58', 613654630));
+
+console.log(custs);
+custs[0].print();
+custs[0].name
+custs.sort(Customer.sort);
+console.log(custs);
 
 // Task 05
 // Создать класс машина - имеющий марку, число цилиндров, мощность. Определить конструктор и функцию печати.
