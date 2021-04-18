@@ -1,9 +1,10 @@
+import './lesson7js';
 console.log('Lesson 7');
 
 // __Proto__
-https://learn.javascript.ru/prototype-inheritance
-https://habr.com/ru/post/518360/
-https://learn.javascript.ru/native-prototypes
+// https://learn.javascript.ru/prototype-inheritance
+// https://habr.com/ru/post/518360/
+// https://learn.javascript.ru/native-prototypes
 
 // Prototype
 // https://learn.javascript.ru/function-prototype
@@ -19,21 +20,6 @@ https://learn.javascript.ru/native-prototypes
 // метода walk, eat, sleep - каждый метод должен выводить в консоль строку имя + действие. Пример:
 // walk => `${this.name} walking`
 // проверить, что методы работают
-class Animal {
-    name =  'Animal'
-    constructor() {
-
-    }
-    walk (walkDo: string) {
-        console.log(`${name} + walkDo`)
-    }
-    eat (eatDo: string) {
-        console.log(`${name} + eatDo`)
-    }
-    sleep (sleepDo: string) {
-        console.log(`${name} + sleepDo`)
-    }
-}
 
 
 //Task 02
@@ -54,6 +40,23 @@ class Animal {
 
 // Task 05
 // Используя метод Apply реализовать свой собственный метод bind
+
+//@ts-ignore
+// Function.prototype._bind = function (ctx, ...args) {
+//     const _this = this;
+//     //@ts-ignore
+//     return function (...args2) {
+//         return _this.apply(ctx, [...args, ...args2]);
+//     }
+// }
+
+Function.prototype._bind = function (ctx, ...args) {
+    ctx.___bindFunction___ = this;
+    //@ts-ignore
+    return function (...args2) {
+        return ctx.___bindFunction___(...args, ...args2);
+    }
+}
 
 
 // just a plug
