@@ -76,7 +76,7 @@ const CurrencyEContainer: React.FC<TProps> = props => {
     );
 };
 
-const mapStateToProps = ( { currency } : {currency: CurrencyState} ): CurrencyState => {
+const mapStateToProps = ({currency}: { currency: CurrencyState }): CurrencyState => {
     return {
         currencies: currency.currencies,
         currentCurrency: currency.currentCurrency,
@@ -84,9 +84,9 @@ const mapStateToProps = ( { currency } : {currency: CurrencyState} ): CurrencySt
         amountOfBYN: currency.amountOfBYN,
         amountOfCurrency: currency.amountOfCurrency,
     };
-}; 
+};
 
-const mapDispatchToProps = (dispatch: Dispatch<CurrencyReducersTypes>) : any => {
+const mapDispatchToProps = (dispatch: Dispatch<CurrencyReducersTypes>): any => {
     return {
         setCurrencyAmount(amountOfBYN: string, amountOfCurrency: string) {
             dispatch(ChangeCurrencyFieldAC(amountOfBYN, amountOfCurrency));
